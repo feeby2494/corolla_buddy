@@ -32,9 +32,9 @@
                 <div v-for="(repair, index) in repairs" :key="index">
                     <RepairForm 
                         v-model="repairs[index]"
-                        @updateBrand="updateBrand($event)"
-                        @updateModel="updateModel($event)"
-                        @updateSerial="updateSerial($event)"
+                        @updateBrand="updateBrand(index, $event)"
+                        @updateModel="updateModel(index, $event)"
+                        @updateSerial="updateSerial(index, $event)"
                         @index="index"
                     />
                 </div>
@@ -101,15 +101,15 @@
 
                 this.$store.commit('removeRepair', repair);
             },
-            updateBrand(index) {
+            updateBrand(index, $event) {
                 console.log(index)
-                console.log(target.value)
-                this.repairs[index].brand = target.value
+                console.log(event.target.value)
+                this.repairs[index].brand = event.target.value
             },
-            updateModel(event, index) {
+            updateModel(index, $event) {
                 this.repairs[index].model = event.target.value
             },
-            updateSerial(event, index) {
+            updateSerial(index, $event) {
                 this.repairs[index].serial = event.target.value
             }
         }
