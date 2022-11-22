@@ -30,7 +30,13 @@
             <div class="column is-2"></div>
             <div class="column is-8">
                 <div v-for="(repair, index) in repairs" :key="index">
-                    <RepairForm v-model="repairs[index]" />
+                    <RepairForm 
+                        v-model="repairs[index]"
+                        @updateBrand="updateBrand($event)"
+                        @updateModel="updateModel($event)"
+                        @updateSerial="updateSerial($event)"
+                        @index="index"
+                    />
                 </div>
                 
             </div>
@@ -53,6 +59,7 @@
 
 
 <script>
+    import store from '@/store'
     import RepairForm from "../components/RepairForm.vue"
     import ContactForm from "../components/ContactForm.vue"
     import AddressForm from "../components/AddressForm.vue"
@@ -65,15 +72,45 @@
         },
         data() {
             return {
-                repairs: [0],
+                repairs: [{
+                    brand: '',
+                    model: '',
+                    serial: ''
+                }],
             }
+        },
+        mounted() {
+            this.repairs = this.$store.state.repairs
         },
         methods: {
             addRepair() {
-                this.repairs.push(0);
+                const repair = {
+                    brand: '',
+                    model: '',
+                    serial: ''
+                }
+
+                this.$store.commit('addRepair', repair);
             },
             removeRepair() {
-                this.repairs.pop(0);
+                const repair = {
+                    brand: '',
+                    model: '',
+                    serial: ''
+                }
+
+                this.$store.commit('removeRepair', repair);
+            },
+            updateBrand(index) {
+                console.log(index)
+                console.log(target.value)
+                this.repairs[index].brand = target.value
+            },
+            updateModel(event, index) {
+                this.repairs[index].model = event.target.value
+            },
+            updateSerial(event, index) {
+                this.repairs[index].serial = event.target.value
             }
         }
     };

@@ -7,7 +7,8 @@ export default createStore({
     },
     isAuthenticated: false,
     token: '',
-    isLoading: false
+    isLoading: false,
+    repairs: [],
   },
   getters: {
   },
@@ -33,6 +34,12 @@ export default createStore({
     },
     setIsLoading(state, status) {
       state.isLoading = status
+    },
+    addRepair(state, repair) {
+      state.repairs.push(repair)
+    },
+    removeRepair(state, repair) {
+      state.repairs.pop(repair)
     }
   },
   actions: {
