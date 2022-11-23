@@ -10,13 +10,13 @@
                 <div class="field column is-6">
                     <label class="label">First Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Text input">
+                        <input class="input" v-model="contact.firstName" type="text" placeholder="Text input">
                     </div>
                 </div>
                 <div class="field column is-6">
                     <label class="label">Last Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Text input">
+                        <input v-model="contact.lastName"  class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="field column is-12">
                     <label class="label">Email</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Text input">
+                        <input v-model="contact.email"  class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
             </div>
@@ -32,10 +32,21 @@
                 <div class="field column is-12">
                     <label class="label">Phone</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Text input">
+                        <input v-model="contact.phone"  class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: [
+            'contact',
+        ],
+        methods: {
+            
+        }
+    }
+</script>

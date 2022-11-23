@@ -3,7 +3,10 @@
         <div class="columns is-multiline">
             <div class="column is-2"></div>
             <div class="column is-8">
-                <ContactForm />
+                <ContactForm 
+                    v-model:contact="contact"
+                    
+                />
             </div>
             <div class="column is-2"></div>
             <div class="column is-2"></div>
@@ -31,11 +34,7 @@
             <div class="column is-8">
                 <div v-for="(repair, index) in repairs" :key="index">
                     <RepairForm 
-                        v-model="repairs[index]"
-                        @updateBrand="updateBrand(index, $event)"
-                        @updateModel="updateModel(index, $event)"
-                        @updateSerial="updateSerial(index, $event)"
-                        @index="index"
+                        v-model:currentRepair="repairs[index]"
                     />
                 </div>
                 
@@ -77,6 +76,14 @@
                     model: '',
                     serial: ''
                 }],
+                contact: {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phone: ''
+                },
+                address: {},
+                deliveryMethod: null
             }
         },
         mounted() {
@@ -100,18 +107,20 @@
                 }
 
                 this.$store.commit('removeRepair', repair);
-            },
-            updateBrand(index, $event) {
-                console.log(index)
-                console.log(event.target.value)
-                this.repairs[index].brand = event.target.value
-            },
-            updateModel(index, $event) {
-                this.repairs[index].model = event.target.value
-            },
-            updateSerial(index, $event) {
-                this.repairs[index].serial = event.target.value
-            }
+            }, // Using Vuex Store in this case my be just over repaeting myself and making things more complicated
+            // updateBrand(index, $event) {
+            //     this.repairs[index].brand = event.target.value
+            //     // this.$store.commit('updateBrand', index, this.repairs[index].brand )
+            // },
+            // updateModel(index, $event) {
+            //     this.repairs[index].model = event.target.value
+            //     // this.$store.commit('updateModel', index, event.target.value)
+            // },
+            // updateSerial(index, $event) {
+            //     this.repairs[index].serial = event.target.value
+            //     // this.$store.commit('updateSerial', index, event.target.value)
+            // },
+           
         }
     };
 </script>

@@ -40,6 +40,16 @@ export default createStore({
     },
     removeRepair(state, repair) {
       state.repairs.pop(repair)
+    },
+    updateBrand(state, index, value){
+      state.repairs[index].brand = value
+    },
+    updateModel(state, index, value){
+      state.repairs[index].model = value
+    },
+    updateSerial(state, index, value){
+      console.log(index, value)
+      state.repairs[index].serial = value
     }
   },
   actions: {

@@ -5,19 +5,19 @@
                 <div class="field column is-4">
                     <label class="label">Brand</label>
                     <div class="control">
-                        <input v-on:input="updateBrandEvent" class="input" type="text" placeholder="Text input">
+                        <input v-model="currentRepair.brand" class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
                 <div class="field column is-4">
                     <label class="label">Model</label>
                     <div class="control">
-                        <input v-on:input="updateModelEvent" class="input" type="text" placeholder="Text input">
+                        <input v-model="currentRepair.model" class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
                 <div class="field column is-4">
                     <label class="label">Serial Number</label>
                     <div class="control">
-                        <input v-on:input="updateSerialEvent" class="input" type="text" placeholder="Text input">
+                        <input v-model="currentRepair.serial"  class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
             </div>
@@ -37,24 +37,18 @@
 
     export default {
         props: [
-            'brand',
-            'model',
-            'serial',
-            'updateBrand',
-            'updateModel',
-            'updateSerial',
-            'index'
+            'currentRepair',
         ],
         methods: {
-            updateBrandEvent() {
-                this.$emit('updateBrand', this.index)
-            },
-            updateModelEvent() {
-                this.$emit('updateModel', this.index)
-            },
-            updateSerialEvent() {
-                this.$emit('updateSerial', this.index)
-            }
+            // updateBrandEvent() {
+            //     this.$emit('updateBrand', this.index)
+            // },
+            // updateModelEvent() {
+            //     this.$emit('updateModel', this.index)
+            // },
+            // updateSerialEvent() {
+            //     this.$emit('updateSerial', this.index)
+            // }
         }
     };
 </script>
