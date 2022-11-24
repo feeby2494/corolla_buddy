@@ -14,6 +14,8 @@
                 <AddressForm 
                     v-model:address="address"
                     v-model:deliveryMethod="deliveryMethod"
+                    v-model:deliveryMethodOptions="deliveryMethodOptions"
+                    @input="updateDeliveryMethod($event.target.value)"
                 />
             </div>
             <div class="column is-2"></div>
@@ -47,7 +49,7 @@
             <div class="column is-8 centered">
                 <div class="field is-grouped">
                     <div class="control">
-                        <button class="button is-link">Submit</button>
+                        <button v-on:click="this.submitWorkOrder" class="button is-link">Submit</button>
                     </div>
                     <div class="control">
                         <button class="button is-link is-light">Cancel</button>
@@ -65,6 +67,7 @@
     import RepairForm from "../components/RepairForm.vue"
     import ContactForm from "../components/ContactForm.vue"
     import AddressForm from "../components/AddressForm.vue"
+    import axios from 'axios'
 
     export default {
         components: {
@@ -92,7 +95,12 @@
                     state: '',
                     zip: ''
                 },
-                deliveryMethod: ''
+                deliveryMethodOptions: [
+                    {text: "Local Dallas, Tx Pick-up and Delivery", value:"local"},
+                    {text:"Mail-in: Fedex", value:"fedex"},
+                    {text:"Mail-in: USPS", value:"usps"}
+                ],
+                deliveryMethod: ""
             }
         },
         mounted() {
@@ -116,7 +124,29 @@
                 }
 
                 this.$store.commit('removeRepair', repair);
-            }, // Using Vuex Store in this case my be just over repaeting myself and making things more complicated
+            }, 
+            submitWorkOrder() {
+                const postBody = {
+                    repairs: this.repairs,
+                    contact: this.contact,
+                    address: this.address,
+                    deliveryMethod: this.deliveryMethod
+                }
+
+                axios
+                .post(`/api/v1/repairs/`, postBody)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            },
+            updateDeliveryMethod(value) {
+                this.deliveryMethod = value
+            }
+            
+            // Using Vuex Store in this case my be just over repaeting myself and making things more complicated
             // updateBrand(index, $event) {
             //     this.repairs[index].brand = event.target.value
             //     // this.$store.commit('updateBrand', index, this.repairs[index].brand )

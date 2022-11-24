@@ -48,10 +48,11 @@
                         <label class="label">Shipping Method (Local Delivery is only for Dallas, Tx Residents)</label>
                         <div class="control">
                             <div class="select">
-                                <select v-model="deliveryMethod">
-                                    <option>Local Dallas, Tx Pick-up and Delivery</option>
-                                    <option>Mail-in: Fedex</option>
-                                    <option>Mail-in: USPS</option>
+                                <select v-model="deliveryMethod" @input="updateValue($event.target.value)">
+                                    <option disabled value="">Please select one</option>
+                                    <option v-for="option in deliveryMethodOptions" :value="option.value">
+                                        {{ option.text }}
+                                    </option>    
                                 </select>
                             </div>
                         </div>
@@ -66,8 +67,18 @@
     export default {
         props: [
             'address',
-            'deliveryMethod'
-        ]
+            'deliveryMethod',
+            'deliveryMethodOptions'
+        ],
+        emits: [
+            'updateDeliveryMethod'
+        ],
+        methods: {
+            updateValue(value) {
+                this.$emit('updateDeliveryMethod', value);
+            }
+        }
     }
+    
 
 </script>
