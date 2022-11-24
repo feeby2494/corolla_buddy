@@ -11,7 +11,10 @@
             <div class="column is-2"></div>
             <div class="column is-2"></div>
             <div class="column is-8 centered">
-                <AddressForm />
+                <AddressForm 
+                    v-model:address="address"
+                    v-model:deliveryMethod="deliveryMethod"
+                />
             </div>
             <div class="column is-2"></div>
             <div class="column is-2"></div>
@@ -82,8 +85,14 @@
                     email: '',
                     phone: ''
                 },
-                address: {},
-                deliveryMethod: null
+                address: {
+                    streetOne: '',
+                    streetTwo: '',
+                    city: '',
+                    state: '',
+                    zip: ''
+                },
+                deliveryMethod: ''
             }
         },
         mounted() {
