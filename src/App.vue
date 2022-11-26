@@ -12,8 +12,8 @@
       </div>
       <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
         <div class="navbar-end">
-          <router-link to="/8th_corolla" class="navbar-item">8th Gen Corolla</router-link>
-          <router-link to="/11th_corolla" class="navbar-item">11th Gen Corolla</router-link>
+          <router-link to="/8th_gen_corolla" class="navbar-item">8th Gen Corolla</router-link>
+          <router-link to="/11th_gen_corolla" class="navbar-item">11th Gen Corolla</router-link>
 
           <div class="navbar-item">
             <div class="buttons">
@@ -75,4 +75,41 @@
 
 <style lang="scss">
 @import '../node_modules/bulma';
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #ccc;
+  border-color: #ccc transparent #ccc transparent;
+  animation: lds-dual-ring linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.is-loading-bar {
+  height: 0;
+  overflow: hidden;
+
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+
+  &.is-loading {
+    height: 80px;
+  }
+}
 </style>

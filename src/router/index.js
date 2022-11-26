@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 import ProductView from '../views/ProductView.vue'
 import RepairView from '../views/RepairView.vue'
+import CategoryView from '../views/CategoryView.vue'
 
 const routes = [
   {
@@ -24,10 +25,16 @@ const routes = [
     component: RepairView
   },
   {
-    path: '/:category_slug/:product_slug/',
+    path: '/:category_slug',
+    name: 'Category',
+    component: CategoryView 
+  },
+  {
+    path: '/:category_slug/:product_slug',
     name: 'Product',
     component: ProductView 
-  }
+  },
+  
 ]
 
 const router = createRouter({
