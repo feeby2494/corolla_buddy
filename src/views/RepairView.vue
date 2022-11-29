@@ -11,11 +11,14 @@
             <div class="column is-2"></div>
             <div class="column is-2"></div>
             <div class="column is-8 centered">
-                <AddressForm 
-                    v-model:address="address"
+                
+                <AddressForm  
+                    v-model:address="address" 
                     v-model:deliveryMethod="deliveryMethod"
                     v-model:deliveryMethodOptions="deliveryMethodOptions"
-                    @input="updateDeliveryMethod($event.target.value)"
+                    v-model:collectionDate="collectionDate"
+                    :deliveryMethod.sync="deliveryMethod"
+                    :collectionDate.sync="collectionDate"
                 />
             </div>
             <div class="column is-2"></div>
@@ -77,6 +80,7 @@
         },
         data() {
             return {
+                selected: '',
                 repairs: [{
                     brand: '',
                     model: '',
@@ -100,7 +104,8 @@
                     {text:"Mail-in: Fedex", value:"fedex"},
                     {text:"Mail-in: USPS", value:"usps"}
                 ],
-                deliveryMethod: ""
+                deliveryMethod: "",
+                collectionDate: "",
             }
         },
         mounted() {
@@ -130,7 +135,8 @@
                     repairs: this.repairs,
                     contact: this.contact,
                     address: this.address,
-                    deliveryMethod: this.deliveryMethod
+                    delivery_method: this.deliveryMethod,
+                    collection_date: this.collectionDate 
                 }
 
                 axios
@@ -142,9 +148,6 @@
                     console.log(error)
                 })
             },
-            updateDeliveryMethod(value) {
-                this.deliveryMethod = value
-            }
             
             // Using Vuex Store in this case my be just over repaeting myself and making things more complicated
             // updateBrand(index, $event) {

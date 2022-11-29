@@ -47,14 +47,21 @@
                     <div class="field">
                         <label class="label">Shipping Method (Local Delivery is only for Dallas, Tx Residents)</label>
                         <div class="control">
+                            <div>Selected: {{ deliveryMethod }}</div>
                             <div class="select">
-                                <select v-model="deliveryMethod" @input="updateValue($event.target.value)">
+                                <select :value="deliveryMethod" @change="$emit('update:deliveryMethod', $event.target.value)">
                                     <option disabled value="">Please select one</option>
-                                    <option v-for="option in deliveryMethodOptions" :value="option.value">
+                                    <option v-for="option in deliveryMethodOptions" :value="option.value" >
                                         {{ option.text }}
                                     </option>    
                                 </select>
                             </div>
+                        </div>
+                    </div>
+                    <div class="field" v-if="deliveryMethod === 'local'"> 
+                        <label class="label">Date for Collection ("YYYY-MM-DD")</label>
+                        <div class="control">
+                            <input  :value="collectionDate" @change="$emit('update:collectionDate', $event.target.value)" class="input" type="text" placeholder="YYYY-MM-DD" />
                         </div>
                     </div>
                 </div>
@@ -68,16 +75,9 @@
         props: [
             'address',
             'deliveryMethod',
-            'deliveryMethodOptions'
-        ],
-        emits: [
-            'updateDeliveryMethod'
-        ],
-        methods: {
-            updateValue(value) {
-                this.$emit('updateDeliveryMethod', value);
-            }
-        }
+            'deliveryMethodOptions',
+            'collectionDate'
+        ]
     }
     
 
