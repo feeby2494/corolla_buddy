@@ -16,9 +16,14 @@
         <h2 class="is-size-2 has-text-centered">Latest Products</h2>
       </div>
 
-      <ProductBox 
-        v-model:product_list="latestProducts"
-      />
+      <div class="columns is-multiline">
+            <ProductBox 
+            
+            v-for="product in latestProducts"
+            v-bind:key="product.id"
+            :product="product">
+            </ProductBox>
+      </div>
     </div>
   </div>
 </template>

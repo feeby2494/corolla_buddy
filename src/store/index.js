@@ -32,6 +32,16 @@ export default createStore({
 
       localStorage.setItem('cart', JSON.stringify(state.cart))
     },
+    removeFromCart(state, item) {
+      // to test if a given item is already in the cart
+      const exists = state.cart.items.filter(i => i.product.id === item.product.id)
+
+      if (exists) {
+        state.cart.items.pop(item)
+      }
+  
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
     setIsLoading(state, status) {
       state.isLoading = status
     },

@@ -10,7 +10,7 @@
                 <div class="field column is-12">
                     <label class="label">Street Address One</label>
                     <div class="control">
-                        <input v-model="address.streetOne" class="input" type="text" placeholder="Text input">
+                        <input v-model="address.streetOne" class="input" type="text" placeholder="Street Address">
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <div class="field column is-12">
                     <label class="label">Street Address Two ( APT, STE )</label>
                     <div class="control">
-                        <input v-model="address.streetTwo" class="input" type="text" placeholder="Text input">
+                        <input v-model="address.streetTwo" class="input" type="text" placeholder="STE, APT">
                     </div>
                 </div>
             </div>
@@ -26,19 +26,19 @@
                 <div class="field column is-4">
                     <label class="label">City</label>
                     <div class="control">
-                        <input v-model="address.city" class="input" type="text" placeholder="Text input">
+                        <input v-model="address.city" class="input" type="text" placeholder="City">
                     </div>
                 </div>
                 <div class="field column is-4">
                     <label class="label">State</label>
                     <div class="control">
-                        <input v-model="address.state" class="input" type="text" placeholder="Text input">
+                        <input v-model="address.state" class="input" type="text" placeholder="State">
                     </div>
                 </div>
                 <div class="field column is-4">
                     <label class="label">Zip Code</label>
                     <div class="control">
-                        <input v-model="address.zip" class="input" type="text" placeholder="Text input">
+                        <input v-model="address.zip" class="input" type="text" placeholder="Zip Code">
                     </div>
                 </div>
             </div>

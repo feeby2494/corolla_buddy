@@ -3,9 +3,18 @@
         <div class="columns is-multiline">
             <h2 class="is-size-2 has-text-centered">{{ category.name }}</h2>
         </div>
-        <ProductBox 
-            v-model:product_list="category.products"
-        />
+    
+        <div class="columns is-multiline">
+            <ProductBox 
+            
+            v-for="product in category.products"
+            v-bind:key="product.id"
+            :product="product">
+            </ProductBox>
+        </div>
+        
+        
+        
     </div>
 </template>
 

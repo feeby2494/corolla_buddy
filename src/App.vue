@@ -19,10 +19,10 @@
             <div class="buttons">
               <router-link to="/log_in" class="button is-light">Log in</router-link>
 
-              <router-link to="cart" class="button is-success">
+              <button @click="showModal()" class="button is-success">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span>Cart ({{ cartTotalLength }})</span>
-              </router-link>
+              </button>
             </div>
           </div>
         </div>
@@ -31,6 +31,37 @@
 
     <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading}">
       <div class="lds-dual-ring"></div>
+    </div>
+    <!-- Turn me into modal or slider -->
+
+    <div class="modal" :class="{'is-active': showCartModalFlag}">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Shopping Cart</p>
+          <button class="delete" aria-label="close" @click="cancelModal">></button>
+        </header>
+        <ul class="modal-card-body columns is-multiline">
+          <div v-if="!cart.items.length" class="column is-12 has-text-centered">No Items in your cart!</div>
+          <li class="column is-12" v-for="(item, index) in cart.items" :key="index">
+            <div class="box columns">
+              <p class="column is-2">{{item.product.name}}</p>
+              <div class="control column is-5 columns">
+                <label class="label column is-7">Quantity:</label>
+                <input class="input column is-5" type="number" v-model="item.quantity">
+              </div>
+              <p class="column is-2">
+                Total: {{ item.quantity * item.product.price }}
+              </p>
+              <button @click="$event=> removeFromCart(item)" class="column is-3 button is-danger">Remove from cart</button>
+            </div> 
+          </li>
+        </ul>
+        <footer class="modal-card-foot">
+          <button class="button is-success" @click="okModal">Ok</button>
+          <button class="button" @click="cancelModal">Cancel</button>
+        </footer>
+      </div>
     </div>
 
     <section class="section">
@@ -44,10 +75,13 @@
 </template>
 
 <script>
+  import { toast } from 'bulma-toast'
   export default {
     data() {
       return {
         showMobileMenu: false,
+        showCartModalFlag: false,
+        okCartPressed: false,
         cart: {
           items: []
         }
@@ -69,6 +103,39 @@
 
         return totalLength
       }
+    },
+    methods: {
+      removeFromCart(item){
+
+        // const item = {
+        //         product: this.cart.items[itemToRemove].product,
+        //         quantity: this.cart.items[itemToRemove].quantity
+        //     }
+
+        this.$store.commit('removeFromCart', item)
+
+          toast({
+              message: 'The product was removed from the cart',
+              type: 'is-success',
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: 'bottom-right',
+          })
+      },
+      showModal() {
+        this.okCartPressed = false;
+        this.showCartModalFlag = true;
+      },
+      okModal() {
+        this.okCartPressed = true;
+        this.showCartModalFlag = false;
+      },
+      cancelModal() {
+        this.okCartPressed = false;
+        this.showCartModalFlag = false;
+      }
+      
     }
   }
 </script>
